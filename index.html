@@ -70,15 +70,15 @@
             const horaTexto = hora ? `Si es posible para las ${hora} ⌚` : "Para lo más pronto posible ⌚";
             const rutaURL = `https://www.google.com/maps/dir/Current+Location/${encodeURIComponent(retiro)}/${encodeURIComponent(entrega)}`;
 
-            const mensaje = `Buenas!, necesito mi bici ya! 🚲
+            const mensaje = `Buenas!, necesito mi bici ya! 🚴
 Voy a llevar ${detalles} 📦!
 Debes pasar a buscarlo por ${retiro} 📍
 Y llevarlo hasta ${entrega} 📍
 ${horaTexto}
 
-Mi nombre es ${nombre || "(no especificado)"} 🙋‍♂️ a su disposición ante cualquier duda sobre mi pedido 💁‍♀️
+Mi nombre es ${nombre || "(no especificado)"} 🙋 a su disposición ante cualquier duda sobre mi pedido 💬
 
-Espero a su confirmación y costo del reparto 💰
+Espero a su confirmación ✅ y costo del reparto 💰
 
 No tocar el siguiente link, es la ruta a seguir para llevar a cabo el trabajo 🗺️
 ${rutaURL}`;
