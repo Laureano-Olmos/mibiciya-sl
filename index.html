@@ -68,8 +68,19 @@
             }
 
             const ruta = `https://www.google.com/maps/dir/Current+Location/${retiro}/${entrega}`;
-            const mensaje = `Hola! Nuevo pedido de reparto 🚲:%0A📦 Detalles: ${detalles}%0A📍 Retiro: ${retiro}%0A📬 Entrega: ${entrega}%0A🕒 Hora deseada: ${hora || "No indicada"}%0A👤 Cliente: ${nombre || "No indicado"}%0A🗺 Ruta sugerida: ${ruta}`;
+            const mensaje = `Buenas!, necesito mi bici ya! 🚲
+Voy a llevar ${descripcion} 📦!
+Debes pasar a buscarlo por ${retiro} 📍
+Y llevarlo hasta ${entrega} 📍
+${horaTexto}
 
+Mi nombre es ${nombre} 🙋‍♂️ a su disposición ante cualquier duda sobre mi pedido 💁‍♀️
+
+Espero a su confirmación y costo del reparto 💰
+
+No tocar el siguiente link, es la ruta a seguir para llevar a cabo el trabajo 🗺️
+${rutaURL}`;
+            
             const telefono = "5493416171240"; // ← Cambiar por tu número real
             const url = `https://wa.me/${telefono}?text=${mensaje}`;
             window.open(url, '_blank');
