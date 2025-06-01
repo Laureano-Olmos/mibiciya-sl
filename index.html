@@ -81,9 +81,9 @@ Espero a su confirmación y costo del reparto 💰
 No tocar el siguiente link, es la ruta a seguir para llevar a cabo el trabajo 🗺️
 ${rutaURL}`;
             
-            const telefono = "5493416171240"; // ← Cambiar por tu número real
-            const url = `https://wa.me/${telefono}?text=${mensaje}`;
-            window.open(url, '_blank');
+            const telefono = "5493416171240";
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            window.open(`https://wa.me/${telefono}?text=${mensajeCodificado}`, "_blank");;
         }
     </script>
 
