@@ -1,94 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Mi Bici Ya 🚲</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background: #f4f4f4;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input, textarea, button {
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        button {
-            background: #25D366;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1ebe5b;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Bici Ya 🚲</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background: #f4f4f4;
+      color: #222;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .tab-buttons button {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      cursor: pointer;
+    }
+    .form-section {
+      display: none;
+    }
+    .form-section.active {
+      display: block;
+    }
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    input[type="checkbox"] {
+      display: inline;
+      width: auto;
+    }
+    button.submit {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 0.7rem;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Mi Bici Ya 🚲</h1>
 
-    <h2>Formulario de Pedido</h2>
-    <p>Completá los datos y te contactaremos por WhatsApp para confirmar el reparto.</p>
+  <div class="section">
+    <h2>Horarios de Atención</h2>
+    <ul>
+      <li>Lunes a Viernes: 8 a 12</li>
+      <li>Sábado: 8 a 12 y 14 a 17</li>
+      <li>Domingo: 8 a 12 y 14 a 17</li>
+      <li>Feriados: Consultar</li>
+    </ul>
+  </div>
 
-    <label>Dirección de retiro</label>
-    <input type="text" id="retiro" placeholder="Ej: Av. San Martín 1200, San Lorenzo">
+  <div class="section">
+    <h2>Tarifas</h2>
+    <table>
+      <tr><th>Concepto</th><th>Días comunes</th><th>Feriados / Domingos</th></tr>
+      <tr><td>Base</td><td>$500</td><td>$700</td></tr>
+      <tr><td>Por Km (Repartos)</td><td>$200</td><td>$300</td></tr>
+      <tr><td>Por Hora (Mandados)</td><td>$1200</td><td>$1500</td></tr>
+      <tr><td>Urgencia</td><td colspan="2">$500 adicionales</td></tr>
+    </table>
+  </div>
 
-    <label>Dirección de entrega</label>
-    <input type="text" id="entrega" placeholder="Ej: Urquiza 800, San Lorenzo">
+  <div class="section tab-buttons">
+    <button onclick="showTab('envios')">📦 Envíos</button>
+    <button onclick="showTab('mandados')">📝 Mandados</button>
+  </div>
 
-    <label>Detalles del pedido</label>
-    <textarea id="detalles" rows="4" placeholder="Ej: Retirar una caja pequeña con libros..."></textarea>
+  <div class="section form-section" id="envios">
+    <h2>Formulario de Envíos</h2>
+    <label>Nombre del cliente: <input id="nombreEnvio" required></label>
+    <label>Origen: <input id="origenEnvio"></label>
+    <label>Destino: <input id="destinoEnvio"></label>
+    <label>Hora: <input id="horaEnvio" type="time"></label>
+    <label><input type="checkbox" id="urgenteEnvio" onchange="toggleUrgente('Envio')"> Urgente</label>
+    <button class="submit" onclick="enviarMensaje('envio')">Enviar por WhatsApp</button>
+  </div>
 
-    <label>Hora deseada (opcional)</label>
-    <input type="text" id="hora" placeholder="Ej: 19:00 hs">
+  <div class="section form-section" id="mandados">
+    <h2>Formulario de Mandados</h2>
+    <label>Nombre del cliente: <input id="nombreMandado" required></label>
+    <label>Hora: <input id="horaMandado" type="time"></label>
+    <label><input type="checkbox" id="urgenteMandado" onchange="toggleUrgente('Mandado')"> Urgente</label>
+    <label>¿Qué mandado es?: <textarea id="detalleMandado"></textarea></label>
+    <label>Dirección de cliente: <input id="direccionMandado"></label>
+    <button class="submit" onclick="enviarMensaje('mandado')">Enviar por WhatsApp</button>
+  </div>
 
-    <label>Nombre del cliente (opcional)</label>
-    <input type="text" id="nombre" placeholder="Tu nombre">
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll('.form-section').forEach(el => el.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+    }
 
-    <button onclick="enviarWhatsApp()">Enviar pedido por WhatsApp</button>
+    function toggleUrgente(tipo) {
+      const horaInput = document.getElementById(`hora${tipo}`);
+      const urgenteCheck = document.getElementById(`urgente${tipo}`);
+      horaInput.disabled = urgenteCheck.checked;
+    }
 
-    <script>
-        function enviarWhatsApp() {
-            const retiro = document.getElementById('retiro').value.trim();
-            const entrega = document.getElementById('entrega').value.trim();
-            const detalles = document.getElementById('detalles').value.trim();
-            const hora = document.getElementById('hora').value.trim();
-            const nombre = document.getElementById('nombre').value.trim();
+    function enviarMensaje(tipo) {
+      let mensaje = 'Hola! Quiero solicitar un ' + (tipo === 'envio' ? 'envío' : 'mandado') + ' con Mi Bici Ya.\n';
+      if (tipo === 'envio') {
+        const nombre = document.getElementById('nombreEnvio').value;
+        const origen = document.getElementById('origenEnvio').value;
+        const destino = document.getElementById('destinoEnvio').value;
+        const urgente = document.getElementById('urgenteEnvio').checked;
+        const hora = urgente ? 'Lo necesito con urgencia' : document.getElementById('horaEnvio').value;
+        mensaje += `Nombre: ${nombre}\nOrigen: ${origen}\nDestino: ${destino}\nHora: ${hora}`;
+      } else {
+        const nombre = document.getElementById('nombreMandado').value;
+        const direccion = document.getElementById('direccionMandado').value;
+        const detalle = document.getElementById('detalleMandado').value;
+        const urgente = document.getElementById('urgenteMandado').checked;
+        const hora = urgente ? 'Lo necesito con urgencia' : document.getElementById('horaMandado').value;
+        mensaje += `Nombre: ${nombre}\nDirección: ${direccion}\nMandado: ${detalle}\nHora: ${hora}`;
+      }
+        const numero = '5493416171240';
+      const url = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(mensaje);
+      window.open(url, '_blank');
+    }
 
-            if (!retiro || !entrega || !detalles) {
-                alert("Por favor completá al menos retiro, entrega y detalles.");
-                return;
-            }
-
-            const horaTexto = hora ? `Si es posible para las ${hora} ⌚` : "Para lo más pronto posible ⌚";
-            const rutaURL = `https://www.google.com/maps/dir/Current+Location/${encodeURIComponent(retiro)}/${encodeURIComponent(entrega)}`;
-
-            const mensaje = `Buenas!, necesito mi bici ya! 🚴
-Voy a llevar ${detalles} 📦!
-Debes pasar a buscarlo por ${retiro} 📍
-Y llevarlo hasta ${entrega} 📍
-${horaTexto}
-
-Mi nombre es ${nombre || "(no especificado)"} 🙋 a su disposición ante cualquier duda sobre mi pedido 💬
-
-Espero a su confirmación ✅ y costo del reparto 💰
-
-No tocar el siguiente link, es la ruta a seguir para llevar a cabo el trabajo 🗺️
-${rutaURL}`;
-
-            const telefono = "5493416171240";
-            const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
-        }
-    </script>
-
+    // Mostrar por defecto Envíos
+    showTab('envios');
+  </script>
 </body>
 </html>
-
