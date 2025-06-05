@@ -1,0 +1,72 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 1rem;
+  background: #f2f2f2;
+  color: #2c3e50;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.section {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #dcdcdc;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.tab-buttons button {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.form-section {
+  display: none;
+}
+
+.form-section.active {
+  display: block;
+}
+
+label, input, textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+input[type="checkbox"] {
+  display: inline;
+  width: auto;
+}
+
+button.submit {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: bold;
+}
