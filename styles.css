@@ -16,6 +16,7 @@ body {
 
 p {
   margin-bottom: 1em;
+  text-align: left;
 }
 
 h1, h2 {
